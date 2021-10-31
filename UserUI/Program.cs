@@ -1,5 +1,5 @@
 ﻿using Business.Concrete;
-using DataAccess.Concrete.InMemory;
+using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -11,51 +11,66 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
+            CarManager carManager = new CarManager(new EfCarDal());
             
-            //Fnc
-            void GetAllDescription() { 
+            //###Fnc###
+            
+            //Get
+            void fGetAllDescription() { 
                 foreach(var car in carManager.GetAll())
                 {
                     Console.WriteLine(car.Description);
                 }
             }
-            //EOF
+            
+            
+            void fGetOneDescription(int id)
+            {
+                Car c = carManager.GetById(id);
+                Console.WriteLine(c.Description);
+            }
+
+            //Add
+            void fAddCar(int id, int brId, int coId, double price, int mYear, string dText)
+            {
+                carManager.Add(new Car { Id = id, BrandId = brId, ColorId = coId, DailyPrice = price, ModelYear = mYear, Description = dText });
+
+            }
+
+
+            //Test
+            void fUIExceptionTest(Car car)
+            {
+                try
+                {
+                    carManager.Add(car);
+
+
+                }
+                catch (Exception)
+                {
+
+                    Console.WriteLine("Bu Id de bir data zaten var ki");
+                }
+            }
+            //###EOF###
 
 
 
-            GetAllDescription();
-            Console.WriteLine(
-                "\n### Add ###\n" +
-                "Here we go..\n");
-            carManager.Add(new Car { Id = 888, ColorId = 888, BrandId = 888, DailyPrice = 888.888, ModelYear = 2022, Description = "Test" });   //T
-            carManager.Add(new Car { Id = 777, ColorId = 0, BrandId = 777, DailyPrice = 777.777, ModelYear = 2021, Description = "Test1" }); //F (c..id = 0)
-            carManager.Add(new Car { Id = 666, ColorId = 6, BrandId = 6, DailyPrice = 6, ModelYear = 2023, Description = "Test2" });//F (m..year > this year +1)
-            carManager.Add(new Car { Id = 555, ColorId = 5, BrandId = 5, DailyPrice = 5, ModelYear = 2000, Description = "" });//F (description lenght <2
-            carManager.Add(new Car { Id = 999, ColorId = 5, BrandId = 5, DailyPrice = 5, ModelYear = 2000, Description = "Test999" });    //T
-            carManager.Add(new Car { Id = 1, ColorId = 5, BrandId = 5, DailyPrice = 5, ModelYear = 2000, Description = "Test5" });//F car id is present in the list
-            GetAllDescription();
 
+            fAddCar(2,1,1,1337.12, 1999,"Benim için \"eh..\", promising one more a step for mankind.");
+            fAddCar(3, 1, 1, 1337.12, 2222, "Birds flyn u know how i feel");
 
-            Console.WriteLine(
-                "\n### Get'nDelete ###\n" +
-                "Here we go..\n");
-            Console.WriteLine("Record Selected for Deletion: {0}{1}", carManager.GetById(999).Description, "\n");
-            Car delCar = carManager.GetById(999);
-            carManager.Delete(delCar);
-            GetAllDescription();
+            fGetAllDescription();
+
+            // fUIExceptionTest(car1);
 
 
 
-            Console.WriteLine(
-                "\n### Get'nUpdate ###\n" +
-                "Here we go..\n");
-            Console.WriteLine("Record Selected for Updation: {0}{1}", carManager.GetById(1).Description, "\n");
-            Car updCar = carManager.GetById(1);
-            updCar.Description = "aaaaabbbbbbbccccccc";
-            carManager.Update(updCar);
-            GetAllDescription();
 
+            fGetOneDescription(2);
+           
+            
         }
     }
 }
