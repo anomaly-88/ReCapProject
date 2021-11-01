@@ -23,12 +23,13 @@ namespace Business.Concrete
             if (GetById(car.Id) == null)
             {
                 _carDal.Add(car);
+                Console.WriteLine(car.Id + " id'li Kayıt Veritabanına Eklendi.");
             }
             else
             {
                 Console.WriteLine("[Businnes]Olmaz olsun öyle id.");
                 Car hold = GetById(car.Id);
-
+                Console.WriteLine(car.Id + " bu sıraya yazmaya çalışıyorsun, isteği yazdım bir kenara.");
 
 
                 Console.WriteLine("Ama yine de senin için yeni bir kayıt açabilirim. Açayım mı ? [E/H]");
@@ -40,8 +41,9 @@ namespace Business.Concrete
                     
                     car.Id = (getLastId + 1);
                     _carDal.Add(car);
+                    Console.WriteLine(car.Id + " id'li Kayıt Veritabanına Eklendi.");
                 }
-                if (nrAnswer.Equals("h"))
+                else if (nrAnswer.Equals("h"))
                 {
                     //Update yazılınca burası yazılacak, update 'de bir ara yazılacak ^^
                     Console.WriteLine("Peki update yapayım mı ?[E/H]"); //burada eğer parametre olarak verilen car 'ın referansı,
