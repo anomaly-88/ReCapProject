@@ -14,10 +14,48 @@ namespace ConsoleUI
 
 
             CarManager carManager = new CarManager(new EfCarDal());
-            
+            LofCarDtoTest();
+
+
+
+
+            //fAddCar(2, 1, 1, 1337.12, 1999, "Benim için \"eh..\", promising one more a step for mankind.");
+            //fAddCar(3, 1, 1, 1337.12, 2222, "Birds flyn u know how i feel");
+
+            //fGetAllDescription();
+
+            // fUIExceptionTest(car1);
+
+            //fGetOneDescription(2);
+
+
+
+
+
+
             //###Fnc###
-            
+
             //Get
+            void LofCarDtoTest()
+            {
+
+                Console.WriteLine("Just a Moment..");
+                int i = 0;
+
+                foreach (var car in carManager.GetCarDetails())
+                {
+                    
+                    if (i == 0) { Console.Clear(); Console.WriteLine("-------------------------------"); i = 1; }
+
+                    Console.WriteLine("ID: " + car.carId +
+                                      "\nBrand: " + car.bName +
+                                      "\nColor: " + car.coName +
+                                      "\nDescription: " + car.Description);
+
+                    Console.WriteLine("-------------------------------");
+                }
+            }
+
             void fGetAllDescription() { 
                 foreach(var car in carManager.GetAll())
                 {
@@ -55,24 +93,15 @@ namespace ConsoleUI
                     Console.WriteLine("Bu Id de bir data zaten var ki");
                 }
             }
+
+
+
             //###EOF###
 
 
 
 
-            fAddCar(2,1,1,1337.12, 1999,"Benim için \"eh..\", promising one more a step for mankind.");
-            fAddCar(3, 1, 1, 1337.12, 2222, "Birds flyn u know how i feel");
 
-            fGetAllDescription();
-
-            // fUIExceptionTest(car1);
-
-
-
-
-            fGetOneDescription(2);
-           
-            
         }
     }
 }

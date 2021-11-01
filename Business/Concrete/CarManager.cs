@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,11 @@ namespace Business.Concrete
             return _carDal.GetAll();
         }
 
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
+
         //public Car GetById(int carId)
         //{
         //    Car carReached = null;
@@ -140,7 +146,7 @@ namespace Business.Concrete
         //        bool carReached = _carDal.GetAll().Any(c => c.Id == car.Id);
         //        if (carReached) { _carDal.Update(car); }
         //        else { Console.WriteLine("Öyle bir araba yok ki, hiç olmadı."); }
-                
+
         //    }
         //    catch (Exception e)
         //    {
