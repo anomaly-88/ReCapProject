@@ -13,14 +13,25 @@ namespace ConsoleUI
         {
 
 
+
+
+
             CarManager carManager = new CarManager(new EfCarDal());
+
+
+
+
             LofCarDtoTest();
 
 
 
 
-            //fAddCar(2, 1, 1, 1337.12, 1999, "Benim için \"eh..\", promising one more a step for mankind.");
-            //fAddCar(3, 1, 1, 1337.12, 2222, "Birds flyn u know how i feel");
+            //fAddCar(3, 1, 2, 1337.12, 1999, "Benim için \"eh..\", promising one more a step for mankind.");
+            //fAddCar(4, 2, 1, 1212.12, 2222, "Birds flyn u know how i feel");
+            //fAddCar(5, 2, 1, 1357.12, 2222, "ummh..");
+            //fAddCar(6, 2, 1, 1357.12, 2222, "Drive to nothing");
+            //LofCarDtoTest();
+
 
             //fGetAllDescription();
 
@@ -42,7 +53,7 @@ namespace ConsoleUI
                 Console.WriteLine("Just a Moment..");
                 int i = 0;
 
-                foreach (var car in carManager.GetCarDetails())
+                foreach (var car in carManager.GetCarDetails().Data)
                 {
                     
                     if (i == 0) { Console.Clear(); Console.WriteLine("-------------------------------"); i = 1; }
@@ -57,7 +68,7 @@ namespace ConsoleUI
             }
 
             void fGetAllDescription() { 
-                foreach(var car in carManager.GetAll())
+                foreach(var car in carManager.GetAll().Data)
                 {
                     Console.WriteLine(car.Description);
                 }
@@ -66,7 +77,7 @@ namespace ConsoleUI
             
             void fGetOneDescription(int id)
             {
-                Car c = carManager.GetById(id);
+                Car c = carManager.GetById(id).Data;
                 Console.WriteLine(c.Description);
             }
 
